@@ -7,9 +7,16 @@ namespace IssueTracker.Data
     {
         public DbSet<Issue> Issues { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public string DbPath { get; }
+
+        public AppDbContext()
         {
-            optionsBuilder.UseSqlite("connect string");
+            DbPath = "IssueTracker.db";
+        }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+            DbPath = "IssueTracker.db";
         }
     }
 }
